@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Blood Donor</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.18/esri/css/esri.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <style>
+      body {
+        margin-top: 50px;
+      }
+      html, body, #map {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .title {
+        color: #FFFFFF;
+      }
+      #map {
+        margin-top: 70px;
+      }
+      #LocateButton {
+        position: absolute;
+        top: 160px;
+        left: 21px;
+        z-index: 50;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div id="navbar" class="navbar-collapse">
+          <h1 class="title">Blood Donor site</h1>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div id="map">
+      <div id="LocateButton"></div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://js.arcgis.com/3.18/"></script>
+    <script src="/js/map.js"></script>
+    <script>
+    var socket = io();
+    $('form').submit(function(){
+      socket.emit('pamela', $('#m').val());
+      $('#m').val('');
+      return false;
+    });
+    socket.on('PIZZA', function(data) {
+      $('#messages').append($('<li>').text(data));
+    })
+    </script>
+  </body>
+</html>
